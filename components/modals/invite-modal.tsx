@@ -27,6 +27,8 @@ export const InviteModal = () => {
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
+
   const onCopy = () => {
     navigator.clipboard.writeText(inviteUrl);
     setCopied(true);
@@ -50,7 +52,6 @@ export const InviteModal = () => {
     }
   };
 
-  const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">

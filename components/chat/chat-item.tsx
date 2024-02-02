@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 
+import { useModal } from "@/hooks/use-modal-store";
 import { Member, MemberRole, Profile } from "@prisma/client";
 import { cn } from "@/lib/utils";
 
@@ -56,7 +57,7 @@ export const ChatItem = ({
   socketQuery,
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { onOpen } = useModal();
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -164,7 +165,7 @@ export const ChatItem = ({
               className={cn(
                 "text-sm text-zinc-600 dark:text-zinc-300",
                 deleted &&
-                  "italic text-zinc-500 dark:text-zinc-400 text-sm mt-1"
+                  "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1"
               )}
             >
               {content}
@@ -223,7 +224,15 @@ export const ChatItem = ({
             </ActionTooltip>
           )}
           <ActionTooltip label="Delete">
-            <Trash className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition" />
+            <Trash
+              onClick={() =>
+                onOpen("deleteMessage", {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                })
+              }
+              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+            />
           </ActionTooltip>
         </div>
       )}

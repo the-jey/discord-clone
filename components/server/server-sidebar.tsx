@@ -153,7 +153,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               label="Voice Channels"
             />
             <div className="space-y-[2px]">
-              {audioChannels.map((channel) => (
+              {audioChannels.map((channel: any) => (
                 <ServerChannel
                   key={channel.id}
                   channel={channel}
@@ -173,7 +173,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               label="Video Channels"
             />
             <div className="space-y-[2px]">
-              {videoChannels.map((channel) => (
+              {videoChannels.map((channel: any) => (
                 <ServerChannel
                   key={channel.id}
                   channel={channel}
@@ -193,7 +193,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               server={server}
             />
             <div className="space-y-[2px]">
-              {members.map((member) => (
+              {members.map((member: any) => (
                 <ServerMember key={member.id} member={member} server={server} />
               ))}
             </div>
